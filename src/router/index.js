@@ -8,17 +8,14 @@ const routes = [
     component: Home
   },
   {
-    path: '/set',
-    name: 'Set',
-    component: () => import('../views/AppSet.vue')
+    path: '/kits',
+    name: 'SystemKits',
+    component: () => import('../views/AppSystemsKits')
   },
   {
     path: '/saved',
     name: 'Saved',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AppSaved.vue')
+    component: () => import('../views/AppSaved.vue')
   }
 ]
 

@@ -8,7 +8,7 @@
             class="form-control__select"
             @input="$emit('update:title', $event.target.value)"
     >
-      <option selected  value="Выбрать">Выбрать</option>
+      <option selected value="Выбрать">Выбрать</option>
       <option v-for="elem in sortSet"
               :key="elem.id"
               :value="elem.id"
@@ -45,10 +45,13 @@ export default {
 <style scoped lang="scss">
 
 .form-control {
-  max-width: 288px;
+  width: 288px;
   position: relative;
   margin-bottom: 1rem;
-  margin-right: 24px;
+
+  @media (max-width: 414px) {
+    width: 100%;
+  }
 
   &::after {
     content: ' ' url("../assets/arrow.svg");
@@ -70,6 +73,9 @@ export default {
 
   &__select {
     margin-top: 15px;
+    @media (max-width: 414px) {
+      width: 100%;
+    }
 
     &:focus {
       outline: none;

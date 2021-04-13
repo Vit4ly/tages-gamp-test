@@ -1,31 +1,50 @@
 <template>
-  <div id="nav" class="container">
+<div class="container">
+  <div id="nav" >
     <app-bread-crumb></app-bread-crumb>
-    <h1>{{ this.$store.state.breadcrumb[activeSteps].name }}</h1>
-
+    <h1 class="nav__title">{{ getBreadcrumb[activeSteps].name }}</h1>
+    <app-sort></app-sort>
   </div>
   <router-view/>
+</div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 import AppBreadCrumb from "@/components/AppBreadCrumb";
-import AppInputFilter from "@/components/AppInputFilter";
+import AppSort from '@/components/AppSort'
 
 export default {
   mounted() {
-    if (this.$store.state.breadcrumb.length) {
-      this.$store.state.activeIndex = this.$store.state.breadcrumb.length - 1
+    if (this.getBreadcrumb.length) {
+      this.setActiveIndex(this.getBreadcrumb.length - 1)
     }
   },
+  methods: {
+    ...mapMutations(['setActiveIndex'])
+  },
   computed: {
-    ...mapGetters(['activeSteps'])
+    ...mapGetters(['activeSteps', 'getBreadcrumb'])
   },
   components: {
     AppBreadCrumb,
-    AppInputFilter
+    AppSort
   }
 }
 </script>
-<style lang="scss">
 
+<style scoped lang="scss">
+.nav {
+  &__title {
+    font-size: 36px;
+    @media (max-width: 414px) {
+      font-size: 1.5em;
+    }
+    @media (max-width: 375px) {
+      font-size: 1.3em;
+    }
+    @media (max-width: 320px) {
+      font-size: 1em;
+    }
+  }
+}
 </style>

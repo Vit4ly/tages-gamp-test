@@ -4,16 +4,23 @@
     box-sizing: border-box;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 16px;
     color: #000000;
 }
- a {
-     text-decoration: none;
-     color: #000000;
- }
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
 li {
     list-style-type: none;
 }
@@ -22,11 +29,33 @@ ul {
     margin-left: 0;
     padding-left: 0;
 }
+
 hr {
     margin: 1rem 0;
 }
 
 .container {
-    max-width: 1489px;
+    max-width: 1490px;
     margin: 0 auto;
+
+}
+
+@media (max-width: 1025px) {
+    .container {
+        max-width: 95%;
+
+    }
+}
+
+@media (max-width: 320px) {
+    .container {
+        max-width: 90%;
+
+    }
+}
+
+@media (max-width: 320px), screen and (orientation: landscape) {
+    html, body {
+        overflow-x: auto;
+    }
 }

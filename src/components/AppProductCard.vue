@@ -1,23 +1,31 @@
 <template>
   <div class="card">
-    <div class="card-block-img">
+    <div class="card__image-block">
       <app-sale v-if='prices["old_price"] ?? false '></app-sale>
-      <img :src="currentUrl" alt="" class="card-img">
+      <img :src="currentUrl" alt="" class="card__img">
     </div>
-    <div class="card-inner">
+    <div class="card__inner">
       <div
-          :class="{ 'card-code': !code ?? true}"
-          class="card-info">
-        <small class="card-info__id-product"
+          :class="{ 'card__code': !code ?? true}"
+          class="card__info">
+        <small class="card__id-product"
                v-show="code ?? ''"
         >{{ code }}</small>
-        <p class="card-info__title">{{ name }}</p>
-        <span class="card-info__discount">{{ prices["old_price"] }}</span>
-        <span class="card-info__actual-price">{{ prices["current_price"] }}</span>
+        <p class="card__title">{{ name }}</p>
+        <span class="card__discount">{{ prices["old_price"] }}</span>
+        <span class="card__actual-price">{{ prices["current_price"] }}</span>
       </div>
-      <div class="card-inner__shopping">
-        <img src="../assets/basket.svg" alt="" class="card-inner__shopping__basket">
-        <img src="../assets/favorite.svg" alt="" class="card-inner__shopping__favorite">
+      <div class="card__inner__shopping">
+        <img
+            @click="$emit('addToShoppingCart')"
+            src="../assets/basket.svg"
+            alt="basket"
+            class="card__inner__shopping-basket">
+        <img
+            @click="$emit('addToFavourites')"
+            src="../assets/favorites.svg"
+            alt="favorites"
+            class="card__inner__shopping-favorites">
       </div>
     </div>
   </div>
@@ -28,6 +36,7 @@ import AppSale from "@/components/AppSale";
 
 export default {
   name: "AppProductCard",
+  emits: ['addToFavourites', 'addToShoppingCart'],
   props: {
     code: {type: String},
     name: {type: String},
@@ -36,6 +45,7 @@ export default {
     material: {type: Number},
 
   },
+  methods: {},
   computed: {
     currentUrl() {
       return require(`../assets/pic/${this.img}.png`)
@@ -52,61 +62,56 @@ export default {
   border: 1px solid #eeeeee;
   display: flex;
   flex-direction: column;
-  flex: 1 0 336px;
+  flex: 0 1 336px;
 
-}
+  &__image-block {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.card-block-img {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  &__img {
+    flex: 0 1 238px;
+    height: auto;
+    margin: 9px 49px;
+    @media (max-width: 320px) {
+      margin: 9px 20px;
 
-}
+    }
+  }
 
-.card-img {
-  flex: 1 0 238px;
-  height: auto;
-  margin: 9px 49px;
+  &__img img {
+    max-width: 238px;
 
-}
+  }
 
-.card-img img {
-  max-width: 238px;
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 12px 9px 22px;
 
-}
-
-.card-inner {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 12px 9px 22px;
-
-
-  &__shopping {
-    &__basket {
+    &__shopping-basket {
       position: relative;
       top: 72px;
       right: 27px;
 
     }
 
-    &__favorite {
+    &__shopping-favorites {
       position: relative;
       top: 73px;
       right: 12px;
 
     }
   }
-}
 
-.card-code {
-  margin-top: 19px;
-}
+  &__code {
+    margin-top: 19px;
 
-.card-info {
+  }
 
   &__id-product {
-
     color: #888888;
     font-size: 10px;
     font-weight: 400;

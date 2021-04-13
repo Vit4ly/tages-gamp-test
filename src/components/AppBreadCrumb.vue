@@ -1,35 +1,34 @@
 <template>
-  <nav class="container">
-    <div class="nav-wrapper">
-      <div class="col">
-        <router-link
-            v-for="({ name, path }, idx) in $store.state.breadcrumb"
-            :key="name"
-            @click="setActive(idx)"
-            :class="{
-                  active: $store.state.isActive,
+  <nav class="nav-wrapper">
+    <div class="col">
+      <router-link
+          v-for="({ name, path }, idx) in getBreadcrumb"
+          :key="name"
+          @click="setActive(idx)"
+          :class="{
+                  active: getIsActive,
                   done: activeSteps !== idx
                   }"
-            :to=path
-            class="breadcrumb"
-        >
-          {{ name }}
-        </router-link>
-      </div>
+          :to=path
+          class="breadcrumb"
+      >
+        {{ name }}
+      </router-link>
     </div>
   </nav>
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import {mapMutations, mapGetters} from 'vuex'
+
 export default {
   name: "AppBreadCrumb",
   methods: {
-...mapMutations(['setActive']),
+    ...mapMutations(['setActive']),
 
   },
   computed: {
-    ...mapGetters(['activeSteps', 'filteredBreadcrumb']),
+    ...mapGetters(['activeSteps', 'getBreadcrumb', 'getIsActive']),
   },
 }
 </script>
@@ -43,20 +42,29 @@ export default {
   display: flex;
   align-items: center;
 
-a {
-  color: #828282;
-  text-decoration: none;
+  a {
+    color: #828282;
+    text-decoration: none;
+    @media (max-width: 414px) {
+      font-size: 0.7em;
+    }
+    @media (max-width: 375px) {
+      font-size: 0.6em;
+    }
+    @media (max-width: 320px) {
+      font-size: 3vw;
+    }
 
-&:not(:last-of-type)::after {
-   content: '/';
-   pointer-events: none;
-   cursor: none;
-   padding: 0 14px 0 14px;
-   position: relative;
-   top: 1px;
+    &:not(:last-of-type)::after {
+      content: '/';
+      pointer-events: none;
+      cursor: none;
+      padding: 0 14px 0 14px;
+      position: relative;
+      top: 1px;
 
- }
-}
+    }
+  }
 }
 
 

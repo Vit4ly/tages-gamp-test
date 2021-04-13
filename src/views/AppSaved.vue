@@ -2,7 +2,7 @@
   <div class="container">
     <aside class="nav-bar">
       <nav>
-        <router-link to="/set">Комплекты стелажных систем</router-link>
+        <router-link to="/kits">Комплекты стелажных систем</router-link>
       </nav>
     </aside>
   </div>
