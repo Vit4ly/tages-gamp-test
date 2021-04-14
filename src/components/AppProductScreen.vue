@@ -9,8 +9,11 @@
             :prices="item.price"
             :img="item.image.url"
             :material="item.material"
+
             @addToShoppingCart="addToShoppingCart(item)"
-            @addFavorites="addFavorites(item)"
+            @addToFavourites="addToFavourites(item)"
+            :shopFlag="getFlagShoppingCart"
+            :favourFlag="getFlagFavourites"
         ></app-product-card>
       </div>
     </div>
@@ -29,7 +32,7 @@ export default {
     ...mapActions(['getProducts'])
   },
   computed: {
-    ...mapGetters(['getProductList'])
+    ...mapGetters(['getProductList', 'getFlagShoppingCart', 'getFlagFavourites'])
   },
   components: {
     AppProductCard

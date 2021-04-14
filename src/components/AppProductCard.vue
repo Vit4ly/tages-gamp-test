@@ -1,31 +1,33 @@
 <template>
   <div class="card">
+
     <div class="card__image-block">
       <app-sale v-if='prices["old_price"] ?? false '></app-sale>
       <img :src="currentUrl" alt="" class="card__img">
     </div>
+
     <div class="card__inner">
       <div
           :class="{ 'card__code': !code ?? true}"
           class="card__info">
-        <small class="card__id-product"
-               v-show="code ?? ''"
-        >{{ code }}</small>
+        <small class="card__id-product" v-show="code ?? ''">{{ code }}</small>
         <p class="card__title">{{ name }}</p>
         <span class="card__discount">{{ prices["old_price"] }}</span>
         <span class="card__actual-price">{{ prices["current_price"] }}</span>
       </div>
+
       <div class="card__inner__shopping">
-        <img
-            @click="$emit('addToShoppingCart')"
-            src="../assets/basket.svg"
-            alt="basket"
-            class="card__inner__shopping-basket">
-        <img
-            @click="$emit('addToFavourites')"
-            src="../assets/favorites.svg"
-            alt="favorites"
-            class="card__inner__shopping-favorites">
+        <div class="card__inner__shopping-basket">
+          <app-shopping-label
+          ></app-shopping-label>
+        </div>
+
+        <div class="card__inner__shopping-favorites">
+          <app-favourites-label
+              @add="$emit('addToFavourites')"
+          ></app-favourites-label>
+        </div>
+
       </div>
     </div>
   </div>
@@ -33,6 +35,8 @@
 
 <script>
 import AppSale from "@/components/AppSale";
+import AppFavouritesLabel from "@/components/AppFavouritesLabel";
+import AppShoppingLabel from "@/components/AppShoppingLabel";
 
 export default {
   name: "AppProductCard",
@@ -43,6 +47,8 @@ export default {
     prices: {type: Object},
     img: {type: String},
     material: {type: Number},
+    shopFlag: {type: Boolean},
+    favourFlag: {type: Boolean}
 
   },
   methods: {},
@@ -52,7 +58,9 @@ export default {
     }
   },
   components: {
-    AppSale
+    AppSale,
+    AppFavouritesLabel,
+    AppShoppingLabel
   }
 }
 </script>
@@ -93,15 +101,15 @@ export default {
 
     &__shopping-basket {
       position: relative;
-      top: 72px;
-      right: 27px;
+      top: 74px;
+      right: 30px;
 
     }
 
     &__shopping-favorites {
       position: relative;
-      top: 73px;
-      right: 12px;
+      top: 52px;
+      right: 5px;
 
     }
   }

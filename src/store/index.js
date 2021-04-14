@@ -3,6 +3,8 @@ import {createStore} from 'vuex'
 export default createStore({
     state: {
         isActive: true,
+        isActiveFavourites: false,
+        isActiveShopping: false,
         activeIndex: 0,
         valuePrice: 'Выбрать',
         valueMaterial: 'Выбрать',
@@ -24,13 +26,38 @@ export default createStore({
     },
     mutations: {
         addToFavourites(state, product) {
-            state.favourites.push(product)
-            localStorage.setItem(`${product.name}`, JSON.stringify(product))
+            if (localStorage.getItem(`${product.name}`)) {
+                const check = [...state.favourites]
+                check.filter(({name}, id) => product.name === name ?
+                    state.favourites.splice(id, 1) : name)
+                localStorage.removeItem(`${product.name}`)
+                state.isActiveFavourites = false
+                console.log(state.isActiveFavourites)
+            }
+            else {
+                state.favourites.push(product)
+                localStorage.setItem(`${product.name}`, JSON.stringify(product))
+                state.isActiveFavourites = true
+                console.log(state.isActiveFavourites)
+            }
+
         },
+
         addToShoppingCart(state, product) {
-            state.shoppingCart.push(product)
-            localStorage.setItem(`${product.name}`, JSON.stringify(product))
+            if (localStorage.getItem(`${product.name}`)) {
+                const check = [...state.shoppingCart]
+                check.filter(({name}, id) => product.name === name ?
+                        state.shoppingCart.splice(id, 1) : name)
+                localStorage.removeItem(`${product.name}`)
+                state.isActiveShopping = false
+            }
+            else {
+                state.shoppingCart.push(product)
+                localStorage.setItem(`${product.name}`, JSON.stringify(product))
+                state.isActiveShopping = true
+            }
         },
+
         setActive(state, idx) {
             state.activeIndex = idx
             state.isActive = state.activeIndex === state.breadcrumb.length - 1;
@@ -54,7 +81,12 @@ export default createStore({
         activeSteps(state) {
             return state.activeIndex
         },
-
+        getFlagFavourites(state) {
+            return state.isActiveFavourites
+        },
+        getFlagShoppingCart(state) {
+            return state.isActiveShopping
+        },
         getIsActive(state) {
             return state.isActive
         },
@@ -73,7 +105,6 @@ export default createStore({
                 return state.productsList.filter(el => el.material === +state.valueMaterial)
             }
             if (state.valuePrice === "Выбрать") {
-                console.log(state.valuePrice)
                 return state.productsList
             }
             if (+state.valuePrice === 1) {
