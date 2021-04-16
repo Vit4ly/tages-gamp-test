@@ -19,12 +19,14 @@
       <div class="card__inner__shopping">
         <div class="card__inner__shopping-basket">
           <app-shopping-label
+              @addToShopping="$emit('addToShoppingCart')"
           ></app-shopping-label>
         </div>
 
         <div class="card__inner__shopping-favorites">
           <app-favourites-label
               @add="$emit('addToFavourites')"
+
           ></app-favourites-label>
         </div>
 
@@ -37,6 +39,7 @@
 import AppSale from "@/components/AppSale";
 import AppFavouritesLabel from "@/components/AppFavouritesLabel";
 import AppShoppingLabel from "@/components/AppShoppingLabel";
+import {mapGetters} from "vuex";
 
 export default {
   name: "AppProductCard",
@@ -53,6 +56,7 @@ export default {
   },
   methods: {},
   computed: {
+    ...mapGetters(['getFlagFavourites']),
     currentUrl() {
       return require(`../assets/pic/${this.img}.png`)
     }

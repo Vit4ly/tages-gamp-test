@@ -32,13 +32,13 @@ export default createStore({
                     state.favourites.splice(id, 1) : name)
                 localStorage.removeItem(`${product.name}`)
                 state.isActiveFavourites = false
-                console.log(state.isActiveFavourites)
+
             }
             else {
                 state.favourites.push(product)
                 localStorage.setItem(`${product.name}`, JSON.stringify(product))
                 state.isActiveFavourites = true
-                console.log(state.isActiveFavourites)
+
             }
 
         },
@@ -50,11 +50,14 @@ export default createStore({
                         state.shoppingCart.splice(id, 1) : name)
                 localStorage.removeItem(`${product.name}`)
                 state.isActiveShopping = false
+
             }
+
             else {
                 state.shoppingCart.push(product)
                 localStorage.setItem(`${product.name}`, JSON.stringify(product))
                 state.isActiveShopping = true
+
             }
         },
 

@@ -35,9 +35,11 @@
   </svg>
 
   <svg
-      @click="$emit['add']"
+      @click="$emit('add')"
       class="icon"
-      :class="{'add-shopping': getFlagFavourites}">
+
+      :class="{'add-shopping': getFlagFavourites}"
+  >
     <use xlink:href="#favorites"></use>
   </svg>
 </template>
@@ -49,8 +51,15 @@ import {mapGetters} from "vuex";
 export default {
   name: "AppFavouritesLabel",
   emits: ['add'],
+  props: ['styles'],
+  data() {
+    return {
+
+    }
+  },
+  methods: {},
   computed: {
-    ...mapGetters(['getFlagFavourites'])
+    ...mapGetters(['getFlagFavourites']),
 
   }
 }

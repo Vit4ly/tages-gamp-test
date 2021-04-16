@@ -9,7 +9,7 @@
   </svg>
 
   <svg
-      @click="$emit('addToShoppingCart')"
+      @click="$emit('addToShopping')"
       class="icon-shopping
             icon__add-shopping"
       :class="{'add-shopping': getFlagShoppingCart}"
@@ -23,6 +23,7 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "AppShoppingLabel",
+  emits: ['addToShopping'],
   computed: {
     ...mapGetters([ 'getFlagShoppingCart'])
 
