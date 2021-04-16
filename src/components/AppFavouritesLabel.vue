@@ -43,9 +43,6 @@
 </template>
 
 <script>
-
-import {mapGetters} from "vuex";
-
 export default {
   name: "AppFavouritesLabel",
   emits: ['add'],
@@ -55,11 +52,6 @@ export default {
       added: false
     }
   },
-  methods: {},
-  computed: {
-    ...mapGetters(['getFlagFavourites']),
-
-  }
 }
 </script>
 
@@ -67,6 +59,8 @@ export default {
 .icon {
   width: 20px;
   height: 19px;
+  cursor: pointer;
+  transition: all .3s;
 
 }
 

@@ -27,7 +27,6 @@
               @add="$emit('addToFavourites')"
           ></app-favourites-label>
         </div>
-
       </div>
     </div>
   </div>
@@ -37,7 +36,6 @@
 import AppSale from "@/components/AppSale";
 import AppFavouritesLabel from "@/components/AppFavouritesLabel";
 import AppShoppingLabel from "@/components/AppShoppingLabel";
-import {mapGetters} from "vuex";
 
 export default {
   name: "AppProductCard",
@@ -52,7 +50,6 @@ export default {
     favourFlag: {type: Boolean}
 
   },
-  methods: {},
   computed: {
     currentUrl() {
       return require(`../assets/pic/${this.img}.png`)
