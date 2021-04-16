@@ -3,8 +3,6 @@ import {createStore} from 'vuex'
 export default createStore({
     state: {
         isActive: true,
-        isActiveFavourites: false,
-        isActiveShopping: false,
         activeIndex: 0,
         valuePrice: 'Выбрать',
         valueMaterial: 'Выбрать',
@@ -83,12 +81,6 @@ export default createStore({
     getters: {
         activeSteps(state) {
             return state.activeIndex
-        },
-        getFlagFavourites(state) {
-            return state.isActiveFavourites
-        },
-        getFlagShoppingCart(state) {
-            return state.isActiveShopping
         },
         getIsActive(state) {
             return state.isActive

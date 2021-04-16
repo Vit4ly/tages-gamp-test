@@ -33,12 +33,10 @@
              10.754 18.1 8.55 18.1 6.408c0-2.638-1.72-4.598-4.006-4.608z"></path>
     </symbol>
   </svg>
-
   <svg
-      @click="$emit('add')"
+      @click="$emit('add'); added = !added"
       class="icon"
-
-      :class="{'add-shopping': getFlagFavourites}"
+      :class="{'add-shopping': added}"
   >
     <use xlink:href="#favorites"></use>
   </svg>
@@ -54,7 +52,7 @@ export default {
   props: ['styles'],
   data() {
     return {
-
+      added: false
     }
   },
   methods: {},

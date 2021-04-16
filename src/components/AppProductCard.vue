@@ -1,6 +1,5 @@
 <template>
   <div class="card">
-
     <div class="card__image-block">
       <app-sale v-if='prices["old_price"] ?? false '></app-sale>
       <img :src="currentUrl" alt="" class="card__img">
@@ -26,7 +25,6 @@
         <div class="card__inner__shopping-favorites">
           <app-favourites-label
               @add="$emit('addToFavourites')"
-
           ></app-favourites-label>
         </div>
 
@@ -56,7 +54,6 @@ export default {
   },
   methods: {},
   computed: {
-    ...mapGetters(['getFlagFavourites']),
     currentUrl() {
       return require(`../assets/pic/${this.img}.png`)
     }
